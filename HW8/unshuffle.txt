@@ -1,0 +1,7 @@
+/* Henry Zhang
+;APCS2 pd9
+;HW #08: Splittin n Mergin
+;2016-03-03
+*/
+
+Divide the cards in half until each pile of cards contains only one, at which point they will be sorted. Then, combine and sort the two already sorted piles, and feed it back to pile before the last division. Continue the merging process with the larger sorted piles until you go back to a sorted version of the original one pile.

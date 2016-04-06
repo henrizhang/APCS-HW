@@ -1,0 +1,17 @@
+/* Henry Zhang
+;APCS2 pd9
+;HW #10: Justify
+;2016-03-08
+*/
+
+Based on our diagram, we concluded that merge sort indeed has a time complexity of O(nlogn).
+
+Explanation:
+
+-the iterations required to divide the array down to single-elements arrays would be the lowest power of 2 greater than the number of arrays in the list: thus, log n
+
+-in the merging steps, each merge is O(n), as the elements are compared to each other, and comparisons add up in linear fashion.
+
+To merge back after the division, the levels are clearly the same from top to the turning point, and from there to the bottom. Thus, it is still logn, but since after each level, we also have a merge step, we multiply n by log n and get 
+
+n log n 	

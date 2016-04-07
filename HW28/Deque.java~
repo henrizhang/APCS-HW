@@ -1,0 +1,69 @@
+public class Deque<T> implements Queue {
+    public DLLNode<T> _front, _end;
+
+    public Deque(){
+	_front = null;
+	_end = null;
+    }
+
+    public void enqueue(T enQVal){
+	//special case: when enqueuing to an empty list, 
+	//make _front && _end point to same node
+	if ( isEmpty() ) {
+	    _front = _end = new DLLNode<T>( enQVal, null );
+	}
+	else {
+	    // Q: Why is this a bad idea:
+	    //    _end = new LLNode<T>( enQVal, null );
+	    _end.setNext( new DLLNode<T>( enQVal, null ) );
+	    _end = _end.getNext();
+	}
+    }
+    public void enqueueF(T enQVal){
+	//special case: when enqueuing to an empty list, 
+	//make _front && _end point to same node
+	if ( isEmpty() ) {
+	    _front = _end = new DLLNode<T>( enQVal, null, null );
+	}
+	else {
+	    // Q: Why is this a bad idea:
+	    //    _end = new LLNode<T>( enQVal, null );
+	    _front.setPrev( new DLLNode<T>( enQVal, null , _front) );
+	    _front = _front.getPrev();
+	}
+    }
+    
+    public T dequeue() 
+    { 
+	T foo = _front.getValue();
+	_front = _front.getNext();
+	//check for emptiness
+	if ( _front == null )
+	    _end = null;
+	return foo;
+    }//O(1)
+
+     public T peekFront() 
+    {
+	return _front.getValue(); 
+    }//O(1)
+
+
+    public boolean isEmpty() 
+    {
+	return _front == null; 
+    }//O(1)
+
+
+    // print each node, separated by spaces
+    public String toString() 
+    { 
+	String foo = "";
+	LLNode<T> tmp = _front;
+	while ( tmp != null ) {
+	    foo += tmp.getValue() + " ";
+	    tmp = tmp.getNext();
+	}
+	return foo;
+    }
+	

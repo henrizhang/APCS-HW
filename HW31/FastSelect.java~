@@ -1,0 +1,60 @@
+/* Henry Zhang
+ ;APCS2 pd9
+ ;HW #31: Fast Selection  (RIP Yams)
+ ;2016-04-13
+ */
+
+public class FastSelect{
+    
+    public static void swap(int index1, int index2, int[] arr){
+	int oldVal=arr[index1];
+	arr[index1]=arr[index2];
+	arr[index2]=oldVal;
+    }
+    
+    public static int partition(int[] arr, int pvtPos){
+	int pvtVal=arr[pvtPos];
+	int savPos=0;
+	swap(pvtPos, arr.length-1, arr);
+	for (int i=0; i<arr.length; i++){
+	    if (arr[i]<pvtVal){
+		swap(savPos,i,arr);
+		savPos++;
+	    }
+	}
+	swap(arr.length,savPos, arr);
+	return savPos;
+    }
+    //O(n)
+
+    public static int FSel(int[] arr, int k, int lo, int hi){
+	if (lo>hi){
+	    return arr[k];
+	}
+	else{
+	    int index=(lo+hi)/2;
+	    int stored=arr[index];
+	    int newIndex=partition(arr, index);
+	    if (arr[k]==stored){
+		return arr[k];
+	    }
+	    else if(arr[k]>stored){
+		int newLo=newIndex+1;
+		int newHi=hi;
+		FSel(arr,k,newLo,newHi);
+	    }
+	    else{
+		int newLo=lo;
+		int newHi=newIndex-1;
+		FSel(arr,k,newLo,newHi);
+	    }
+	    
+	}
+    }
+
+    public static void main(String[] args){
+	int[] betterThings = {8,9,13,12,1};
+	return(FSel(betterThings, 3, 0,4));
+    }
+}
+	    
